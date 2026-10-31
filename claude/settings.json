@@ -1,0 +1,18 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    }
+  },
+  "tui": "fullscreen",
+  "enabledPlugins": {
+    "claude-hud@claude-hud": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "'__NODE__' '__HOME__/.claude/plugins/claude-hud/statusline.mjs'"
+  }
+}

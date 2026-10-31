@@ -1,0 +1,87 @@
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# GitHub command-line tool
+brew "gh"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
+# Kubernetes package manager
+brew "helm"
+# Improved top (interactive process viewer)
+brew "htop"
+# Little helper to run CNCF's k3s in Docker
+brew "k3d"
+# Fast, highly customisable system info script
+brew "neofetch"
+# Manage multiple Node.js versions
+brew "nvm"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Your CLI home video recorder
+brew "vhs"
+# Enable Windows-like alt-tab
+cask "alt-tab"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Full TeX Live distribution with GUI applications
+cask "mactex"
+# Move and resize windows using keyboard shortcuts or snap areas
+cask "rectangle"
+vscode "aaron-bond.better-comments"
+vscode "anthropic.claude-code"
+vscode "bradlc.vscode-tailwindcss"
+vscode "christian-kohler.path-intellisense"
+vscode "dbaeumer.vscode-eslint"
+vscode "docker.docker"
+vscode "dracula-theme.theme-dracula"
+vscode "dsznajder.es7-react-js-snippets"
+vscode "eamodio.gitlens"
+vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-close-tag"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "ionutvmi.path-autocomplete"
+vscode "james-yu.latex-workshop"
+vscode "jasonnutter.search-node-modules"
+vscode "mkxml.vscode-filesize"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.vscode-typescript-next"
+vscode "nodesource.vscode-for-node-js-development-pack"
+vscode "redhat.java"
+vscode "redhat.vscode-commons"
+vscode "redhat.vscode-xml"
+vscode "redhat.vscode-yaml"
+vscode "ritwickdey.liveserver"
+vscode "steoates.autoimport"
+vscode "visualstudioexptteam.intellicode-api-usage-examples"
+vscode "visualstudioexptteam.vscodeintellicode"
+vscode "vmware.vscode-boot-dev-pack"
+vscode "vmware.vscode-concourse"
+vscode "vmware.vscode-manifest-yaml"
+vscode "vmware.vscode-spring-boot"
+vscode "vscjava.migrate-java-to-azure"
+vscode "vscjava.vscode-gradle"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"
+vscode "vscjava.vscode-java-upgrade"
+vscode "vscjava.vscode-maven"
+vscode "vscjava.vscode-spring-boot-dashboard"
+vscode "vscjava.vscode-spring-initializr"
+vscode "vscode-icons-team.vscode-icons"
+vscode "vscodevim.vim"
+vscode "wallabyjs.quokka-vscode"
+vscode "wix.vscode-import-cost"
+vscode "xabikos.javascriptsnippets"
+vscode "zignd.html-css-class-completion"
+go "github.com/wailsapp/wails/v2/cmd/wails"
+npm "corepack"
+npm "pnpm"

@@ -1,49 +1,56 @@
 # dotfiles
-A set of `vim`, `zsh`, and `tmux` configuration files for JavaScript Developer who likes to use Vim/NeoVim on macOS or Ubuntu.
 
-![Screenshot](screenshot.png)
+My macOS setup: zsh with Oh My Zsh, git, Homebrew packages, Claude Code settings with
+[ai-devkit](https://github.com/bthanhtung/ai-devkit) skills and memory, and a few tool configs.
+One command sets up a new Mac.
 
-Install
--------
+## Install
 
-Clone onto your machine:
+```bash
+git clone https://github.com/bthanhtung/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh --dry-run   # see what it would do
+./install.sh
+```
 
-    git clone git://github.com/codeaholicguy/dotfiles.git
+Options: `--no-packages` skips the Brewfile, `--no-claude` skips Claude Code and the ai-devkit skills.
 
-Simply run file (maybe you must run `chmod +x ./install.sh` before run that file):
+The script is safe to re-run. Existing files are moved to `~/.dotfiles-backup/<timestamp>/`
+before anything is replaced, and finished steps are skipped.
 
-    ./install.sh --macos
+## What it sets up
 
-On Ubuntu, install dependencies and link dotfiles:
+| Step | Details |
+| --- | --- |
+| Homebrew | installs Homebrew if missing, then everything in `Brewfile` (CLI tools, apps, VS Code extensions) |
+| Shell | Oh My Zsh with `zsh-autosuggestions` and `zsh-syntax-highlighting`, nvm with the latest Node.js LTS |
+| Dotfiles | symlinks `zsh/`, `git/`, `herdr/`, `ai-devkit/` configs into `~` |
+| Claude Code | installs Claude Code, writes `~/.claude/settings.json` (claude-hud status line), installs the ai-devkit built-in skills globally and the `ai-devkit-memory` MCP server |
 
-    ./install.sh --linux
+```
+zsh/          .zshrc, .zshenv, .bash_profile
+git/          .gitconfig, .gitignore_global
+claude/       settings.json template (copied, because Claude Code writes machine state into it)
+herdr/        ~/.config/herdr/config.toml
+ai-devkit/    ~/.ai-devkit/.ai-devkit.json (registers the bthanhtung/ai-devkit skill registry)
+Brewfile      Homebrew formulae, casks, VS Code extensions
+install.sh    the installer
+```
 
-Or run those steps separately:
+## Secrets and machine-specific settings
 
-    ./install.sh --deps
-    ./install.sh --dotfiles
+Nothing secret lives in this repo. Put tokens, work email, and per-machine tweaks in files that
+the configs load but git ignores:
 
-Theme setup is opt-in:
+- `~/.zshrc.local`, sourced at the end of `.zshrc`
+- `~/.gitconfig.local`, included by `.gitconfig`
 
-    ./install.sh --theme
+## Updating
 
-To install vim/neovim plugins:
+Edit the files here (the symlinks make `~/.zshrc` and friends point at them), then commit. To refresh
+the package list: `brew bundle dump --force --file Brewfile`.
 
-    ./install.sh --post-install
+## Credits
 
-If you prefer to run plugin commands manually, in `vim/neovim` run:
-
-    :PlugClean
-    :PlugInstall
-
-If you want to get newest version of `vim/neovim` plugin, in `vim/neovim` simply run:
-
-    :PlugUpdate
-
-Credit
--------
-
-Thanks to:
-
-https://github.com/dracula/dracula-theme/
-
+Started as a fork of [codeaholicguy/dotfiles](https://github.com/codeaholicguy/dotfiles); its vim and
+tmux setup is still in this repo's git history.

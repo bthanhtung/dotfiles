@@ -1,6 +1,5 @@
 [user]
 	name = TungDaDev
-	email = bthanhtung.se@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global
 [difftool "sourcetree"]

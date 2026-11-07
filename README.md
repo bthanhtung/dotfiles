@@ -13,7 +13,9 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-Options: `--no-packages` skips the Brewfile, `--no-claude` skips Claude Code and the ai-devkit skills.
+Options: `--no-packages` skips the Brewfile, `--no-claude` skips Claude Code and the ai-devkit skills,
+`--no-squad` skips the squad-devkit setup. `SQUAD_DEVKIT_DIR` overrides where squad-devkit is cloned
+(default `~/Workspace/03_Development/Projects/squad-devkit`).
 
 The script is safe to re-run. Existing files are moved to `~/.dotfiles-backup/<timestamp>/`
 before anything is replaced, and finished steps are skipped.
@@ -25,7 +27,9 @@ before anything is replaced, and finished steps are skipped.
 | Homebrew | installs Homebrew if missing, then everything in `Brewfile` (CLI tools, apps, VS Code extensions) |
 | Shell | Oh My Zsh with `zsh-autosuggestions` and `zsh-syntax-highlighting`, nvm with the latest Node.js LTS |
 | Dotfiles | symlinks `zsh/`, `git/`, `herdr/`, `ai-devkit/` configs into `~` |
+| Git identity | writes your email to `~/.gitconfig.local` if none is set (asks, default is the GitHub noreply address) |
 | Claude Code | installs Claude Code, writes `~/.claude/settings.json` (claude-hud status line), installs the ai-devkit built-in skills globally and the `ai-devkit-memory` MCP server |
+| squad-devkit | clones or updates [squad-devkit](https://github.com/bthanhtung/squad-devkit), then runs its `scripts/install-devkit.sh --no-prompt` (needs the `squad` CLI from the Brewfile) |
 
 ```
 zsh/          .zshrc, .zshenv, .bash_profile
@@ -43,7 +47,8 @@ Nothing secret lives in this repo. Put tokens, work email, and per-machine tweak
 the configs load but git ignores:
 
 - `~/.zshrc.local`, sourced at the end of `.zshrc`
-- `~/.gitconfig.local`, included by `.gitconfig`
+- `~/.gitconfig.local`, included by `.gitconfig`. The installer stores your git email here (default: the GitHub
+  noreply address). To change it: `git config --file ~/.gitconfig.local user.email you@example.com`
 
 ## Updating
 

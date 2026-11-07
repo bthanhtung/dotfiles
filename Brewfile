@@ -1,3 +1,4 @@
+tap "mco-org/tap"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # GitHub command-line tool
@@ -10,12 +11,20 @@ brew "gradle"
 brew "helm"
 # Improved top (interactive process viewer)
 brew "htop"
+# Command-line JSON processor
+brew "jq"
 # Little helper to run CNCF's k3s in Docker
 brew "k3d"
+# Multi-agent collaboration CLI for coding agents
+brew "mco-org/tap/squad"
 # Fast, highly customisable system info script
 brew "neofetch"
 # Manage multiple Node.js versions
 brew "nvm"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Static analysis tool for shell scripts
+brew "shellcheck"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)

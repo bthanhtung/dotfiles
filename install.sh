@@ -5,6 +5,7 @@
 #   ./install.sh --dry-run     print what would happen, change nothing
 #   ./install.sh --no-packages skip Homebrew packages (Brewfile)
 #   ./install.sh --no-claude   skip installing Claude Code and ai-devkit skills
+#   ./install.sh --no-squad    skip the squad-devkit setup
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -12,13 +13,17 @@ BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 DRY_RUN=0
 PACKAGES=1
 CLAUDE=1
+SQUAD=1
+SQUAD_DEVKIT_DIR="${SQUAD_DEVKIT_DIR:-$HOME/Workspace/03_Development/Projects/squad-devkit}"
+DEFAULT_GIT_EMAIL="49778611+bthanhtung@users.noreply.github.com"
 
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
     --no-packages) PACKAGES=0 ;;
     --no-claude) CLAUDE=0 ;;
-    -h|--help) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    --no-squad) SQUAD=0 ;;
+    -h|--help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) echo "Unknown option: $arg" >&2; exit 2 ;;
   esac
 done
@@ -98,6 +103,21 @@ link git/gitignore_global "$HOME/.gitignore_global"
 link herdr/config.toml "$HOME/.config/herdr/config.toml"
 link ai-devkit/ai-devkit.json "$HOME/.ai-devkit/.ai-devkit.json"
 
+say "Git identity"
+# The email lives in ~/.gitconfig.local (never committed); gitconfig includes it.
+git_local="$HOME/.gitconfig.local"
+current_email="$(git config --file "$git_local" user.email 2>/dev/null || true)"
+if [[ -n "$current_email" ]]; then
+  printf '    ok %s\n' "$git_local"
+else
+  git_email="$DEFAULT_GIT_EMAIL"
+  if (( ! DRY_RUN )) && [[ -t 0 && -t 1 ]]; then
+    read -r -p "Git email [$DEFAULT_GIT_EMAIL]: " answer || answer=""
+    git_email="${answer:-$DEFAULT_GIT_EMAIL}"
+  fi
+  run git config --file "$git_local" user.email "$git_email"
+fi
+
 say "Claude Code settings"
 # Copied, not linked: Claude Code writes machine-specific state into settings.json.
 settings="$HOME/.claude/settings.json"
@@ -131,6 +151,20 @@ if (( CLAUDE )); then
     else
       run "$claude_bin" mcp add --scope user ai-devkit-memory -- npx -y @ai-devkit/memory
     fi
+  fi
+fi
+
+if (( SQUAD )); then
+  say "squad-devkit"
+  if [[ ! -d "$SQUAD_DEVKIT_DIR/.git" ]]; then
+    run git clone https://github.com/bthanhtung/squad-devkit.git "$SQUAD_DEVKIT_DIR" || echo "    squad-devkit clone failed; re-run later"
+  else
+    run git -C "$SQUAD_DEVKIT_DIR" pull --ff-only || echo "    squad-devkit pull failed; continuing with the current checkout"
+  fi
+  if command -v squad >/dev/null 2>&1; then
+    run "$SQUAD_DEVKIT_DIR/scripts/install-devkit.sh" --no-prompt || echo "    squad-devkit install failed; re-run later"
+  else
+    echo "    squad CLI missing (brew install mco-org/tap/squad); re-run later"
   fi
 fi
 
